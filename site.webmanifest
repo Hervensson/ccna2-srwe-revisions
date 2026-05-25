@@ -1,0 +1,19 @@
+{
+  "name": "CCNA 2 SRWE Revisions",
+  "short_name": "CCNA SRWE",
+  "description": "Examen de revision CCNA 2 SRWE avec score, erreurs et fiches.",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
