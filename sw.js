@@ -1,14 +1,17 @@
-const CACHE_NAME = "ccna-srwe-v14";
+const CACHE_NAME = "ccna-srwe-v16";
 const CORE_ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
   "./enhance.css",
+  "./ux-polish.css",
   "./questions.js",
   "./app.js",
   "./enhance.js",
   "./launch-fix.js",
   "./home-button.js",
+  "./ux-polish.js",
+  "./force-home.js",
   "./site.webmanifest",
   "./icon.svg",
 ];
@@ -27,6 +30,20 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put("./index.html", copy));
+          return response;
+        })
+        .catch(() => caches.match("./index.html"))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cached) => cached || fetch(event.request).then((response) => {
       const copy = response.clone();
