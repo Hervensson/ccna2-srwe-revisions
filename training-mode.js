@@ -44,7 +44,7 @@
       try {
         sessionStorage.setItem(RESUME_KEY, "1");
       } catch {}
-      window.location.href = `${window.location.pathname}?v=21&resume=1`;
+      window.location.href = `${window.location.pathname}?v=22&resume=1`;
     });
     start.insertAdjacentElement("afterend", button);
   }
