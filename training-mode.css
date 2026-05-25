@@ -1,0 +1,58 @@
+.training-action {
+  color: #061016;
+  background: #57d68d;
+  border-color: transparent;
+}
+
+.training-feedback {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(147, 165, 189, 0.18);
+  background: rgba(7, 17, 31, 0.86);
+}
+
+.training-feedback.good {
+  border-color: rgba(87, 214, 141, 0.48);
+  background: rgba(87, 214, 141, 0.08);
+}
+
+.training-feedback.bad {
+  border-color: rgba(255, 122, 144, 0.48);
+  background: rgba(255, 122, 144, 0.08);
+}
+
+.training-feedback strong {
+  font-size: 1.05rem;
+}
+
+.training-feedback p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.training-feedback .answer-line {
+  color: var(--good);
+  font-weight: 900;
+}
+
+.choice.training-correct {
+  border-color: rgba(87, 214, 141, 0.7);
+  background: rgba(87, 214, 141, 0.1);
+}
+
+.choice.training-wrong {
+  border-color: rgba(255, 122, 144, 0.72);
+  background: rgba(255, 122, 144, 0.1);
+}
+
+.matching-row.training-correct {
+  border-color: rgba(87, 214, 141, 0.62);
+}
+
+.matching-row.training-wrong {
+  border-color: rgba(255, 122, 144, 0.62);
+}
