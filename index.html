@@ -10,11 +10,8 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="apple-touch-icon" href="icon.svg">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=11">
-    <link rel="stylesheet" href="enhance.css?v=11">
-    <style>
-      .study-shell{width:min(1180px,100%);margin:18px 0}.study-nav{position:sticky;top:0;z-index:5;display:flex;gap:8px;padding:8px;margin-bottom:12px;overflow-x:auto;border-radius:8px;border:1px solid var(--line-soft);background:rgba(7,17,31,.95);backdrop-filter:blur(12px)}.study-nav button{min-height:40px;padding:0 14px;border-radius:6px;border:1px solid transparent;color:var(--muted);background:transparent;font-weight:900;white-space:nowrap}.study-nav button.active{color:#07111f;background:var(--accent)}.study-page{display:none}.study-page.active{display:block}.study-page>.score-board,.study-page>.theme-stats,.study-page>.history-panel{width:100%;margin:0 0 12px}.study-page:not(.active) .theme-chart,.study-page:not(.active) .revision-panel{display:none}.revision-card details:not([open]) p{display:none}.revision-card p{max-width:80ch}.revision-panel .revision-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}@media(max-width:660px){.revision-panel .revision-grid{grid-template-columns:1fr}.study-shell{margin-top:12px}}
-    </style>
+    <link rel="stylesheet" href="styles.css?v=12">
+    <link rel="stylesheet" href="enhance.css?v=12">
   </head>
   <body>
     <main class="app">
@@ -47,16 +44,27 @@
             <p id="sessionMode" class="mode-line"></p>
           </div>
           <div class="exam-stats" aria-label="Statistiques de session">
-            <div class="stat"><span>Temps</span><strong id="timer">01:15:00</strong></div>
-            <div class="stat"><span>Progression</span><strong id="progressText">0/70</strong></div>
-            <button id="resetBtn" class="ghost-button">Nouvelle session</button>
+            <div class="stat">
+              <span>Temps</span>
+              <strong id="timer">01:15:00</strong>
+            </div>
+            <div class="stat">
+              <span>Progression</span>
+              <strong id="progressText">0/70</strong>
+            </div>
+          <button id="resetBtn" class="ghost-button">Nouvelle session</button>
           </div>
         </header>
 
-        <div class="progress-track" aria-hidden="true"><div id="progressFill" class="progress-fill"></div></div>
+        <div class="progress-track" aria-hidden="true">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
 
         <div class="layout">
-          <aside class="question-map" aria-label="Navigation des questions"><div id="questionGrid" class="question-grid"></div></aside>
+          <aside class="question-map" aria-label="Navigation des questions">
+            <div id="questionGrid" class="question-grid"></div>
+          </aside>
+
           <article class="question-panel">
             <div id="questionMeta" class="question-meta"></div>
             <h2 id="questionText" class="question-text"></h2>
@@ -76,7 +84,10 @@
       <section id="resultScreen" class="result-screen hidden">
         <header class="result-header">
           <div>
-            <div class="brand-row compact"><span class="brand-mark">SRWE</span><span>R&eacute;sultats</span></div>
+            <div class="brand-row compact">
+              <span class="brand-mark">SRWE</span>
+              <span>Resultats</span>
+            </div>
             <h1>Correction finale</h1>
           </div>
           <div class="result-actions">
@@ -98,24 +109,14 @@
         <div id="resultsList" class="results-list"></div>
       </section>
     </main>
-
     <div id="imageModal" class="image-modal hidden" role="dialog" aria-modal="true" aria-label="Agrandissement de l'illustration">
       <button id="imageModalClose" class="modal-close">Fermer</button>
       <img id="imageModalImg" alt="Illustration agrandie">
     </div>
 
-    <script src="questions.js?v=11"></script>
-    <script src="app.js?v=11"></script>
-    <script src="enhance.js?v=11"></script>
-    <script>
-      (function(){
-        function panel(shell,id){return shell&&shell.querySelector('#'+shell.id+'-'+id)}
-        function move(target){for(var i=1;i<arguments.length;i++){var el=arguments[i];if(el&&target&&el.parentElement!==target)target.appendChild(el)}}
-        function setActive(shell,id){if(!shell)return;shell.dataset.active=id;[].forEach.call(shell.querySelectorAll('[data-study-tab]'),function(b){b.classList.toggle('active',b.dataset.studyTab===id)});[].forEach.call(shell.querySelectorAll('.study-page'),function(p){p.classList.toggle('active',p.id.slice(shell.id.length+1)===id)})}
-        function shell(id,after,tabs,active){var host=document.getElementById(id);if(!host){var anchor=document.querySelector(after);if(!anchor)return null;host=document.createElement('section');host.id=id;host.className='study-shell';host.innerHTML='<nav class="study-nav">'+tabs.map(function(t){return '<button type="button" data-study-tab="'+t.id+'">'+t.label+'</button>'}).join('')+'</nav><div class="study-pages">'+tabs.map(function(t){return '<section id="'+id+'-'+t.id+'" class="study-page"></section>'}).join('')+'</div>';anchor.insertAdjacentElement('afterend',host);[].forEach.call(host.querySelectorAll('[data-study-tab]'),function(b){b.addEventListener('click',function(){setActive(host,b.dataset.studyTab)})})}setActive(host,host.dataset.active||active);return host}
-        function organize(){var h=shell('homeStudyShell','.start-actions',[{id:'overview',label:'Accueil'},{id:'progress',label:'Progression'},{id:'cards',label:'Fiches'},{id:'history',label:'Historique'}],'overview');move(panel(h,'overview'),document.getElementById('learningDashboard'));move(panel(h,'progress'),document.getElementById('themeChartStart'));move(panel(h,'cards'),document.getElementById('revisionCardsStart'));move(panel(h,'history'),document.getElementById('startHistory'));var r=shell('resultStudyShell','.result-header',[{id:'correction',label:'Correction'},{id:'progress',label:'Progression'},{id:'cards',label:'Fiches'},{id:'history',label:'Historique'}],'correction');move(panel(r,'correction'),document.getElementById('scoreBoard'),document.querySelector('.result-tabs'),document.getElementById('resultsList'));move(panel(r,'progress'),document.getElementById('globalStats'),document.getElementById('themeChartResult'),document.getElementById('themeStats'));move(panel(r,'cards'),document.getElementById('revisionCardsResult'));move(panel(r,'history'),document.getElementById('historyPanel'))}
-        var count=0;var timer=setInterval(function(){organize();if(++count>12)clearInterval(timer)},300);document.addEventListener('click',function(){setTimeout(organize,100)})
-      })();
-    </script>
+    <script src="questions.js?v=12"></script>
+    <script src="app.js?v=12"></script>
+    <script src="enhance.js?v=12"></script>
+    <script src="launch-fix.js?v=12"></script>
   </body>
 </html>
