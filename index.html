@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CCNA 2 SRWE - Examen de révision</title>
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=5">
+    <link rel="stylesheet" href="enhance.css?v=5">
   </head>
   <body>
     <main class="app">
@@ -18,8 +19,11 @@
         <div class="start-actions">
           <button id="startBtn" class="primary-action">Démarrer une session</button>
           <button id="redoErrorsStartBtn" class="secondary-action">Refaire mes erreurs</button>
+          <button id="difficultStartBtn" class="secondary-action">Questions difficiles</button>
+          <button id="weakThemeStartBtn" class="secondary-action">Thème faible</button>
           <a class="download-action" href="ccna2-srwe-revisions-site.zip" download>Télécharger le site</a>
         </div>
+        <div id="learningDashboard" class="learning-dashboard"></div>
         <div id="startHistory" class="history-panel"></div>
       </section>
 
@@ -99,7 +103,13 @@
       </section>
     </main>
 
-    <script src="questions.js?v=4"></script>
-    <script src="app.js?v=4"></script>
+    <div id="imageModal" class="image-modal hidden" role="dialog" aria-modal="true" aria-label="Agrandissement de l'illustration">
+      <button id="imageModalClose" class="modal-close">Fermer</button>
+      <img id="imageModalImg" alt="Illustration agrandie">
+    </div>
+
+    <script src="questions.js?v=5"></script>
+    <script src="app.js?v=5"></script>
+    <script src="enhance.js?v=5"></script>
   </body>
 </html>
