@@ -1,5 +1,5 @@
 (function () {
-  function activateTab(tabId, activeButton) {
+  function activateTab(tabId, activeButton, shouldScroll = true) {
     const shell = document.querySelector("#homeStudyShell");
     if (!shell || !tabId) return;
     shell.dataset.active = tabId;
@@ -11,6 +11,14 @@
     shell.querySelectorAll(".study-page").forEach((page) => {
       page.classList.toggle("active", page.id === `homeStudyShell-${tabId}`);
     });
+
+    if (shouldScroll) {
+      setTimeout(() => {
+        const page = document.querySelector(`#homeStudyShell-${tabId}`);
+        const target = page?.classList.contains("active") ? page : shell;
+        target?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 40);
+    }
   }
 
   function moveHomeNav() {
@@ -40,14 +48,23 @@
     nav.addEventListener("click", (event) => {
       const button = event.target.closest("[data-study-tab]");
       if (!button) return;
+      event.preventDefault();
       activateTab(button.dataset.studyTab, button);
     }, true);
     nav.addEventListener("touchend", (event) => {
       const button = event.target.closest("[data-study-tab]");
       if (!button) return;
+      event.preventDefault();
       activateTab(button.dataset.studyTab, button);
-    }, { passive: true, capture: true });
+    }, { passive: false, capture: true });
   }
+
+  document.addEventListener("click", (event) => {
+    const button = event.target.closest("#homeTopbar [data-study-tab]");
+    if (!button) return;
+    event.preventDefault();
+    activateTab(button.dataset.studyTab, button);
+  }, true);
 
   document.addEventListener("DOMContentLoaded", moveHomeNav);
   moveHomeNav();
