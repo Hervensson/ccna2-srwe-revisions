@@ -16,6 +16,7 @@
   border-radius: 8px;
   background: rgba(7, 17, 31, 0.94);
   backdrop-filter: blur(14px);
+  pointer-events: auto;
 }
 
 .home-topbar .brand-row {
@@ -45,7 +46,13 @@
 }
 
 .home-topbar .study-nav button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
   touch-action: manipulation;
+  pointer-events: auto;
 }
 
 @media (max-width: 660px) {
