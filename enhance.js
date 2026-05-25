@@ -74,15 +74,58 @@
   function deleteHistoryEntry(id) {
     write(keys.history, history().filter((entry) => entry.id !== id));
     renderDashboard();
+    renderGlobalStats();
     renderEnhancedHistory();
+  }
+
+  function sectionTitle(text) {
+    const title = document.createElement("h2");
+    title.className = "section-title";
+    title.textContent = text;
+    return title;
+  }
+
+  function statRows(rows) {
+    return rows.map((row) => {
+      const percent = row.total ? Math.round((row.correct / row.total) * 100) : 0;
+      return `
+        <div class="theme-row">
+          <strong>${row.theme}</strong>
+          <span class="mini-bar"><i style="width:${percent}%"></i></span>
+          <span>${row.correct}/${row.total} - ${percent}%</span>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function renderGlobalStats() {
+    const panel = document.querySelector("#globalStats");
+    if (!panel) return;
+    const rows = aggregateThemes().filter((row) => row.total > 0);
+    panel.innerHTML = "";
+    panel.append(sectionTitle("Bilan global par thème"));
+    if (!rows.length) {
+      const empty = document.createElement("p");
+      empty.className = "muted";
+      empty.textContent = "Ton bilan global apparaîtra après tes premières sessions terminées.";
+      panel.append(empty);
+      return;
+    }
+    panel.insertAdjacentHTML("beforeend", statRows(rows));
+  }
+
+  function addSectionTitle(panel, text) {
+    if (!panel || panel.querySelector(".section-title")) return;
+    panel.prepend(sectionTitle(text));
   }
 
   function renderEnhancedHistory() {
     document.querySelectorAll(".history-panel").forEach((panel) => {
-      const entries = history();
-      [...panel.querySelectorAll(".history-row")].forEach((row, index) => {
+      addSectionTitle(panel, "Historique des sessions");
+      const rows = [...panel.querySelectorAll(".history-row")];
+      rows.forEach((row) => {
         if (row.querySelector(".delete-history")) return;
-        const entry = entries[index];
+        const entry = history().find((item) => (row.textContent || "").includes(formatDate(item.date)));
         if (!entry) return;
         const button = document.createElement("button");
         button.className = "delete-history";
@@ -95,6 +138,32 @@
         row.append(button);
       });
     });
+  }
+
+  function decorateResults() {
+    renderGlobalStats();
+    addSectionTitle(document.querySelector("#themeStats"), "Cette session par thème");
+    renderEnhancedHistory();
+  }
+
+  function patchResultsRenderer() {
+    if (typeof window.renderResults !== "function" || window.renderResults.__enhanced) return;
+    const original = window.renderResults;
+    window.renderResults = function (...args) {
+      const output = original.apply(this, args);
+      setTimeout(decorateResults, 0);
+      return output;
+    };
+    window.renderResults.__enhanced = true;
+  }
+
+  function formatDate(value) {
+    return new Intl.DateTimeFormat("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(new Date(value));
   }
 
   function startIds(ids) {
@@ -148,5 +217,6 @@
   renderDashboard();
   bindStartButtons();
   bindImageZoom();
-  renderEnhancedHistory();
+  patchResultsRenderer();
+  decorateResults();
 })();
