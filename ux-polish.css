@@ -1,8 +1,10 @@
 /* Final UX polish layer: compact dashboard, cleaner cards, mobile-first rhythm. */
 .start-screen.polished-home {
   width: min(1120px, calc(100% - 18px));
+  max-width: calc(100vw - 18px);
   padding: clamp(14px, 3vw, 26px);
   gap: 12px;
+  overflow-x: hidden;
 }
 
 .start-screen.polished-home .brand-row:first-child {
@@ -14,6 +16,7 @@
   border-radius: 8px;
   background: rgba(7, 17, 31, 0.92);
   backdrop-filter: blur(14px);
+  justify-content: flex-start;
 }
 
 .start-screen.polished-home h1 {
@@ -232,14 +235,28 @@
 }
 
 @media (max-width: 660px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
   .start-screen.polished-home {
     width: calc(100% - 10px);
+    max-width: calc(100vw - 10px);
     margin: 5px auto;
     padding: 12px;
   }
 
   .start-screen.polished-home .brand-row:first-child {
     top: 5px;
+  }
+
+  .start-screen.polished-home h1 {
+    font-size: 2.25rem;
+  }
+
+  .start-screen.polished-home .muted {
+    font-size: 0.92rem;
   }
 
   .polish-hero,
