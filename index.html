@@ -3,9 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CCNA 2 SRWE - Examen de révision</title>
-    <link rel="stylesheet" href="styles.css?v=8">
-    <link rel="stylesheet" href="enhance.css?v=8">
+    <meta name="theme-color" content="#07111f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="CCNA SRWE">
+    <title>CCNA 2 SRWE - Examen de r&eacute;vision</title>
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=9">
+    <link rel="stylesheet" href="enhance.css?v=9">
   </head>
   <body>
     <main class="app">
@@ -14,14 +20,14 @@
           <span class="brand-mark">SRWE</span>
           <span>CCNA 2</span>
         </div>
-        <h1>Examen de révision</h1>
+        <h1>Examen de r&eacute;vision</h1>
         <p id="bankSummary" class="muted"></p>
         <div class="start-actions">
-          <button id="startBtn" class="primary-action">Démarrer une session</button>
+          <button id="startBtn" class="primary-action">D&eacute;marrer une session</button>
           <button id="redoErrorsStartBtn" class="secondary-action">Refaire mes erreurs</button>
           <button id="difficultStartBtn" class="secondary-action">Questions difficiles</button>
-          <button id="weakThemeStartBtn" class="secondary-action">Thème faible</button>
-          <a class="download-action" href="ccna2-srwe-revisions-site.zip" download>Télécharger le site</a>
+          <button id="weakThemeStartBtn" class="secondary-action">Th&egrave;me faible</button>
+          <a class="download-action" href="ccna2-srwe-revisions-site.zip" download>T&eacute;l&eacute;charger le site</a>
         </div>
         <div id="learningDashboard" class="learning-dashboard"></div>
         <div id="startHistory" class="history-panel"></div>
@@ -68,7 +74,7 @@
         </div>
 
         <footer class="bottombar">
-          <button id="prevBtn" class="secondary-action">Précédente</button>
+          <button id="prevBtn" class="secondary-action">Pr&eacute;c&eacute;dente</button>
           <button id="difficultBtn" class="flag-button" aria-pressed="false">Question difficile</button>
           <button id="nextBtn" class="secondary-action">Suivante</button>
           <button id="submitBtn" class="primary-action">Soumettre</button>
@@ -80,7 +86,7 @@
           <div>
             <div class="brand-row compact">
               <span class="brand-mark">SRWE</span>
-              <span>Résultats</span>
+              <span>R&eacute;sultats</span>
             </div>
             <h1>Correction finale</h1>
           </div>
@@ -97,7 +103,7 @@
         <div class="result-tabs" role="tablist" aria-label="Filtres de correction">
           <button class="tab-button active" data-filter="wrong">Mes erreurs</button>
           <button class="tab-button" data-filter="difficult">Questions difficiles</button>
-          <button class="tab-button" data-filter="themeWeak">Thèmes faibles</button>
+          <button class="tab-button" data-filter="themeWeak">Th&egrave;mes faibles</button>
           <button class="tab-button" data-filter="all">Tout afficher</button>
         </div>
         <div id="resultsList" class="results-list"></div>
@@ -109,8 +115,8 @@
       <img id="imageModalImg" alt="Illustration agrandie">
     </div>
 
-    <script src="questions.js?v=8"></script>
-    <script src="app.js?v=8"></script>
-    <script src="enhance.js?v=8"></script>
+    <script src="questions.js?v=9"></script>
+    <script src="app.js?v=9"></script>
+    <script src="enhance.js?v=9"></script>
   </body>
 </html>
