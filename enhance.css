@@ -37,6 +37,26 @@
   font-size: clamp(1rem, 2vw, 1.45rem);
 }
 
+.goal-card label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.goal-card input {
+  width: 58px;
+  min-height: 34px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: rgba(7, 17, 31, 0.88);
+  text-align: center;
+  font-weight: 900;
+}
+
 .section-title {
   grid-column: 1 / -1;
   margin: 0 0 4px;
@@ -52,6 +72,137 @@
 
 .history-row {
   grid-template-columns: minmax(150px, 1fr) minmax(110px, 180px) minmax(90px, auto) auto;
+}
+
+.theme-chart,
+.revision-panel {
+  width: min(1180px, 100%);
+  margin: 12px 0;
+  padding: 14px;
+  border-radius: 8px;
+  background: rgba(8, 18, 31, 0.78);
+  border: 1px solid var(--line-soft);
+}
+
+.theme-chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.theme-chart-head span {
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: minmax(130px, 190px) minmax(150px, 1fr) 54px;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+}
+
+.chart-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.chart-label strong {
+  color: var(--text);
+}
+
+.chart-track {
+  position: relative;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.16);
+}
+
+.chart-track i,
+.chart-track b {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.chart-track i {
+  left: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), #7dd3fc);
+}
+
+.chart-track b {
+  width: 2px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.chart-percent {
+  text-align: right;
+  font-weight: 900;
+}
+
+.chart-row.goal-ok .chart-percent {
+  color: var(--good);
+}
+
+.revision-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.revision-card {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line-soft);
+  background: rgba(14, 22, 36, 0.82);
+}
+
+.revision-card span {
+  display: block;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.revision-card strong {
+  display: block;
+  margin-top: 8px;
+  line-height: 1.35;
+}
+
+.revision-card p {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.revision-card div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.revision-card button {
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 6px;
+  color: var(--text);
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid var(--line);
+  font-weight: 900;
+}
+
+.revision-card button.active {
+  color: #07111f;
+  background: var(--accent);
 }
 
 .question-image {
@@ -116,5 +267,24 @@
 
   .delete-history {
     width: 100%;
+  }
+
+  .chart-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .chart-label,
+  .theme-chart-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .chart-percent {
+    text-align: left;
+  }
+
+  .revision-grid {
+    grid-template-columns: 1fr;
   }
 }
