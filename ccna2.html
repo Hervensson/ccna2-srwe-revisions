@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CCNA 2 SRWE - Revision classe</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="classe.css?v=2">
+  </head>
+  <body>
+    <main class="class-app">
+      <header class="class-hero">
+        <nav class="class-top">
+          <span class="brand">SRWE</span>
+          <span>Quiz CCNA 2</span>
+        </nav>
+        <section class="hero-grid">
+          <div>
+            <p class="kicker">CCNA 2</p>
+            <h1>Revision rapide</h1>
+            <p class="intro">Une version simple pour s'entrainer : 70 questions aleatoires avec timer 1h15, ou toute la banque si besoin.</p>
+          </div>
+          <div class="start-card">
+            <label for="sessionMode">Format</label>
+            <select id="sessionMode">
+              <option value="70">Session 70 questions - 1h15</option>
+              <option value="all">Toutes les questions</option>
+            </select>
+            <label for="themeSelect">Theme</label>
+            <select id="themeSelect">
+              <option value="">Tous les themes</option>
+            </select>
+            <button id="startClassQuiz" type="button">Lancer le quiz</button>
+            <p id="bankInfo">Chargement des questions...</p>
+          </div>
+        </section>
+      </header>
+
+      <section id="quizView" class="quiz-view hidden">
+        <div class="quiz-head">
+          <div>
+            <p class="kicker">Question</p>
+            <h2 id="questionCounter">1 / 70</h2>
+          </div>
+          <div class="progress">
+            <strong id="timer">01:15:00</strong>
+            <span id="answeredCounter">0 reponse</span>
+            <div><i id="progressFill"></i></div>
+          </div>
+        </div>
+
+        <article class="question-card">
+          <p id="questionTheme" class="theme-pill"></p>
+          <h3 id="questionText"></h3>
+          <div id="questionImages" class="image-list"></div>
+          <div id="answerList" class="answer-list"></div>
+        </article>
+
+        <footer class="quiz-actions">
+          <button id="prevQuestion" type="button">Precedente</button>
+          <button id="nextQuestion" type="button">Suivante</button>
+          <button id="submitQuiz" type="button">Voir le score</button>
+        </footer>
+      </section>
+
+      <section id="resultView" class="result-view hidden">
+        <div class="result-card">
+          <p class="kicker">Resultat</p>
+          <h2 id="finalScore">0 / 70</h2>
+          <p id="finalPercent"></p>
+          <div class="result-actions">
+            <button id="retryQuiz" type="button">Recommencer</button>
+            <button id="backToStart" type="button">Retour accueil</button>
+          </div>
+        </div>
+        <div id="correctionList" class="correction-list"></div>
+      </section>
+    </main>
+
+    <script src="questions.js"></script>
+    <script src="classe.js?v=2"></script>
+  </body>
+</html>
