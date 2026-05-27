@@ -3,12 +3,158 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="0; url=ccna2.html">
-    <title>CCNA 2 SRWE</title>
-    <script>window.location.replace('ccna2.html');</script>
+    <meta name="theme-color" content="#07111f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="CCNA SRWE">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>CCNA 2 SRWE - Examen de rÃ©vision</title>
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=24">
+    <link rel="stylesheet" href="enhance.css?v=24">
+    <link rel="stylesheet" href="ux-polish.css?v=24">
+    <link rel="stylesheet" href="mobile-history.css?v=24">
+    <link rel="stylesheet" href="mobile-fix.css?v=24">
+    <link rel="stylesheet" href="revision-pro.css?v=24">
+    <link rel="stylesheet" href="training-mode.css?v=24">
+    <link rel="stylesheet" href="top-nav.css?v=24">
   </head>
   <body>
-    <p>Redirection vers le quiz CCNA 2...</p>
-    <p><a href="ccna2.html">Ouvrir le quiz</a></p>
+    <main class="app">
+      <section id="startScreen" class="start-screen hidden">
+        <div class="brand-row">
+          <span class="brand-mark">SRWE</span>
+          <span>CCNA 2</span>
+        </div>
+        <h1>Examen de rÃ©vision</h1>
+        <p id="bankSummary" class="muted"></p>
+        <div class="start-actions">
+          <button id="startBtn" class="primary-action">DÃ©marrer une session</button>
+          <button id="redoErrorsStartBtn" class="secondary-action">Refaire mes erreurs</button>
+          <button id="difficultStartBtn" class="secondary-action">Questions difficiles</button>
+          <button id="weakThemeStartBtn" class="secondary-action">ThÃ¨me faible</button>
+          <a class="download-action" href="ccna2-srwe-revisions-site.zip" download>TÃ©lÃ©charger le site</a>
+        </div>
+        <div id="learningDashboard" class="learning-dashboard"></div>
+        <div id="startHistory" class="history-panel"></div>
+      </section>
+
+      <section id="examShell" class="exam-shell hidden">
+        <header class="topbar">
+          <div>
+            <div class="brand-row compact">
+              <span class="brand-mark">SRWE</span>
+              <span>Mode examen</span>
+            </div>
+            <h1 id="sessionTitle">Question 1 sur 70</h1>
+            <p id="sessionMode" class="mode-line"></p>
+          </div>
+          <div class="exam-stats" aria-label="Statistiques de session">
+            <div class="stat">
+              <span>Temps</span>
+              <strong id="timer">01:15:00</strong>
+            </div>
+            <div class="stat">
+              <span>Progression</span>
+              <strong id="progressText">0/70</strong>
+            </div>
+          <button id="resetBtn" class="ghost-button">Nouvelle session</button>
+          </div>
+        </header>
+
+        <div class="progress-track" aria-hidden="true">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+
+        <div class="layout">
+          <aside class="question-map" aria-label="Navigation des questions">
+            <div id="questionGrid" class="question-grid"></div>
+          </aside>
+
+          <article class="question-panel">
+            <div id="questionMeta" class="question-meta"></div>
+            <h2 id="questionText" class="question-text"></h2>
+            <div id="imageWrap" class="image-wrap"></div>
+            <div id="answerArea" class="answer-area"></div>
+          </article>
+        </div>
+
+        <footer class="bottombar">
+          <button id="prevBtn" class="secondary-action">PrÃ©cÃ©dente</button>
+          <button id="difficultBtn" class="flag-button" aria-pressed="false">Question difficile</button>
+          <button id="nextBtn" class="secondary-action">Suivante</button>
+          <button id="submitBtn" class="primary-action">Soumettre</button>
+        </footer>
+      </section>
+
+      <section id="resultScreen" class="result-screen hidden">
+        <header class="result-header">
+          <div>
+            <div class="brand-row compact">
+              <span class="brand-mark">SRWE</span>
+              <span>Resultats</span>
+            </div>
+            <h1>Correction finale</h1>
+          </div>
+          <div class="result-actions">
+            <button id="redoWrongBtn" class="secondary-action">Refaire uniquement les erreurs</button>
+            <button id="newFromResultsBtn" class="primary-action">Nouvelle session</button>
+          </div>
+        </header>
+
+        <div id="scoreBoard" class="score-board"></div>
+        <div id="globalStats" class="theme-stats"></div>
+        <div id="themeStats" class="theme-stats"></div>
+        <div id="historyPanel" class="history-panel"></div>
+        <div class="result-tabs" role="tablist" aria-label="Filtres de correction">
+          <button class="tab-button active" data-filter="wrong">Mes erreurs</button>
+          <button class="tab-button" data-filter="difficult">Questions difficiles</button>
+          <button class="tab-button" data-filter="themeWeak">ThÃ¨mes faibles</button>
+          <button class="tab-button" data-filter="all">Tout afficher</button>
+        </div>
+        <div id="resultsList" class="results-list"></div>
+      </section>
+    </main>
+    <div id="imageModal" class="image-modal hidden" role="dialog" aria-modal="true" aria-label="Agrandissement de l'illustration">
+      <button id="imageModalClose" class="modal-close">Fermer</button>
+      <img id="imageModalImg" alt="Illustration agrandie">
+    </div>
+
+    <script src="questions.js?v=24"></script>
+    <script src="app.js?v=24"></script>
+    <script src="enhance.js?v=24"></script>
+    <script src="launch-fix.js?v=24"></script>
+    <script src="home-button.js?v=24"></script>
+    <script src="ux-polish.js?v=24"></script>
+    <script src="revision-pro.js?v=24"></script>
+    <script src="training-mode.js?v=24"></script>
+    <script src="top-nav.js?v=24"></script>
+    <script src="force-home.js?v=24"></script>
+    <script>
+      (function () {
+        function forceHomeWhenFinished() {
+          try {
+            var raw = localStorage.getItem("ccnaSrweExamSession");
+            var saved = raw && JSON.parse(raw);
+            if (!saved || !saved.submitted) return;
+            localStorage.removeItem("ccnaSrweExamSession");
+            var start = document.getElementById("startScreen");
+            var exam = document.getElementById("examShell");
+            var result = document.getElementById("resultScreen");
+            if (start && exam && result) {
+              start.classList.remove("hidden");
+              exam.classList.add("hidden");
+              result.classList.add("hidden");
+            }
+          } catch (error) {
+            // Keep normal launch behavior if storage is blocked.
+          }
+        }
+        forceHomeWhenFinished();
+        setTimeout(forceHomeWhenFinished, 250);
+      })();
+    </script>
   </body>
 </html>
+
