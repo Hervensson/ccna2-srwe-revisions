@@ -31,6 +31,7 @@
     finalPercent: document.querySelector("#finalPercent"),
     correction: document.querySelector("#correctionList"),
     retry: document.querySelector("#retryQuiz"),
+    backToStart: document.querySelector("#backToStart"),
   };
 
   let deadline = 0;
@@ -62,7 +63,15 @@
     els.next.addEventListener("click", () => goTo(state.current + 1));
     els.submit.addEventListener("click", showResults);
     els.retry.addEventListener("click", startQuiz);
+    els.backToStart.addEventListener("click", showHome);
     updateTimerLabel(false);
+  }
+
+  function showHome() {
+    clearInterval(timerId);
+    els.quiz.classList.add("hidden");
+    els.results.classList.add("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function startQuiz() {
