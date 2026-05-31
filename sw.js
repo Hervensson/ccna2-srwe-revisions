@@ -1,4 +1,4 @@
-const CACHE_NAME = "ccna-srwe-v25";
+const CACHE_NAME = "ccna-srwe-v26";
 const CORE_ASSETS = [
   "./",
   "./index.html",
