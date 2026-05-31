@@ -2,7 +2,7 @@
   "name": "CCNA 2 SRWE Revisions",
   "short_name": "CCNA SRWE",
   "description": "Application de revision CCNA 2 SRWE avec sessions, erreurs, fiches, statistiques et mode hors ligne.",
-  "start_url": "./?v=26&source=pwa",
+  "start_url": "./?v=27&source=pwa",
   "scope": "./",
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui", "browser"],
