@@ -20,7 +20,7 @@
     try {
       sessionStorage.setItem(RESUME_KEY, "1");
     } catch {}
-    location.href = `${location.pathname}?v=27&resume=1`;
+    location.href = `${location.pathname}?v=28&resume=1`;
   }
 
   function menu() {
