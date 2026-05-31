@@ -1,6 +1,6 @@
 (function () {
   const BANK = window.CCNA_QUESTIONS || [];
-  const VERSION = `ccna-srwe-${BANK.length}-v5`;
+  const VERSION = `ccna-srwe-${BANK.length}-v3`;
   const SESSION_KEY = "ccnaSrweExamSession";
   const RESUME_KEY = "ccnaSrweOpenSession";
   const DURATION_MS = 75 * 60 * 1000;
