@@ -4,19 +4,8 @@
   const SESSION_KEY = "ccnaSrweExamSession";
   const RESUME_KEY = "ccnaSrweOpenSession";
   const DURATION_MS = 75 * 60 * 1000;
-  const groups = [
-    { label: "VLAN", tests: ["vlan", "trunk", "inter-vlan"] },
-    { label: "STP", tests: ["stp", "spanning"] },
-    { label: "EtherChannel", tests: ["etherchannel", "lacp", "pagp"] },
-    { label: "WLAN", tests: ["wlan", "sans fil", "wireless"] },
-    { label: "Routage IPv6", tests: ["ipv6", "routage"] },
-    { label: "Securite LAN", tests: ["securite", "port security", "dhcp snooping"] },
-    { label: "DHCP", tests: ["dhcp"] },
-  ];
-
-  function normalize(value) {
-    return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  }
+  const themes = [...new Set(BANK.map((question) => question.theme).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, "fr"));
 
   function shuffled(values) {
     const copy = [...values];
@@ -25,11 +14,6 @@
       [copy[index], copy[random]] = [copy[random], copy[index]];
     }
     return copy;
-  }
-
-  function matches(question, group) {
-    const text = normalize(`${question.theme || ""} ${question.question || ""}`);
-    return group.tests.some((test) => text.includes(normalize(test)));
   }
 
   function questionItem(question) {
@@ -43,9 +27,8 @@
   }
 
   function launch(selectedLabels, requestedSize) {
-    const selectedGroups = groups.filter((group) => selectedLabels.includes(group.label));
-    const pool = selectedGroups.length
-      ? BANK.filter((question) => selectedGroups.some((group) => matches(question, group)))
+    const pool = selectedLabels.length
+      ? BANK.filter((question) => selectedLabels.includes(question.theme))
       : BANK;
     if (!pool.length) {
       alert("Aucune question trouvee pour cette selection.");
@@ -54,8 +37,8 @@
     const picked = shuffled(pool).slice(0, Math.min(requestedSize, pool.length));
     localStorage.setItem(SESSION_KEY, JSON.stringify({
       version: VERSION,
-      mode: selectedGroups.length ? "theme" : "normal",
-      theme: selectedGroups.map((group) => group.label).join(" + ") || "Tout melanger",
+      mode: selectedLabels.length ? "theme" : "normal",
+      theme: selectedLabels.join(" + ") || "Tout melanger",
       createdAt: Date.now(),
       deadline: Date.now() + DURATION_MS,
       current: 0,
@@ -67,7 +50,7 @@
     try {
       sessionStorage.setItem(RESUME_KEY, "1");
     } catch {}
-    location.href = `${location.pathname}?v=25&resume=1`;
+    location.href = `${location.pathname}?v=26&resume=1`;
   }
 
   function render() {
@@ -77,13 +60,16 @@
     menu.innerHTML = `
       <div class="theme-menu-head">
         <div><span>Revision ciblee</span><h2>Choisis un ou plusieurs themes</h2></div>
-        <button type="button" class="theme-reset" data-theme-reset>Tout deselectionner</button>
+        <div class="theme-head-actions">
+          <button type="button" class="theme-reset" data-theme-select-all>Tout selectionner</button>
+          <button type="button" class="theme-reset" data-theme-reset>Tout deselectionner</button>
+        </div>
       </div>
       <div class="theme-choices">
-        ${groups.map((group) => `
+        ${themes.map((theme) => `
           <label class="theme-choice">
-            <input type="checkbox" value="${group.label}" data-theme-choice>
-            <span>${group.label}</span>
+            <input type="checkbox" value="${theme}" data-theme-choice>
+            <span>${theme}</span>
           </label>
         `).join("")}
       </div>
@@ -109,9 +95,8 @@
     const selectedLabels = () => choices.filter((input) => input.checked).map((input) => input.value);
     const updateSummary = () => {
       const labels = selectedLabels();
-      const selectedGroups = groups.filter((group) => labels.includes(group.label));
-      const count = selectedGroups.length
-        ? BANK.filter((question) => selectedGroups.some((group) => matches(question, group))).length
+      const count = labels.length
+        ? BANK.filter((question) => labels.includes(question.theme)).length
         : BANK.length;
       summary.textContent = labels.length
         ? `${labels.length} theme${labels.length > 1 ? "s" : ""} - ${count} questions disponibles.`
@@ -119,6 +104,10 @@
     };
 
     choices.forEach((input) => input.addEventListener("change", updateSummary));
+    menu.querySelector("[data-theme-select-all]").addEventListener("click", () => {
+      choices.forEach((input) => { input.checked = true; });
+      updateSummary();
+    });
     menu.querySelector("[data-theme-reset]").addEventListener("click", () => {
       choices.forEach((input) => { input.checked = false; });
       updateSummary();
