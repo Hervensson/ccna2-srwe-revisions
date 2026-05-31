@@ -43,6 +43,13 @@
   margin-top: 12px;
 }
 
+.theme-head-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .theme-launcher label {
   display: flex;
   align-items: center;
@@ -85,6 +92,10 @@
 
   .theme-launcher button,
   .theme-reset {
+    width: 100%;
+  }
+
+  .theme-head-actions {
     width: 100%;
   }
 }
