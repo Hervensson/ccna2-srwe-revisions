@@ -1,4 +1,4 @@
-const CACHE_NAME = "ccna-srwe-v26";
+const CACHE_NAME = "ccna-srwe-v27";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -11,6 +11,7 @@ const CORE_ASSETS = [
   "./training-mode.css",
   "./top-nav.css",
   "./theme-selector.css",
+  "./home-compact.css",
   "./questions.js",
   "./app.js",
   "./enhance.js",
@@ -21,6 +22,7 @@ const CORE_ASSETS = [
   "./training-mode.js",
   "./top-nav.js",
   "./theme-selector.js",
+  "./home-compact.js",
   "./force-home.js",
   "./site.webmanifest",
   "./icon.svg",
